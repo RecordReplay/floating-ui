@@ -1,0 +1,22 @@
+name: Tests
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '30 5 * * *'
+
+inputs:
+  project:
+    description: "Playwright project to use"
+    default: "replay-firefox"
+
+jobs:
+  functional-tests:
+    name: Functional tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup
+      - uses: ./.github/actions/functional
+        with:
+          project: ${{ inputs.project }}
+          apiKey: ${{ secrets.RECORD_REPLAY_API_KEY }}
