@@ -26,6 +26,7 @@ jobs:
       - run: npx playwright install-deps
       - uses: bahmutov/npm-install@v1
       - run: npx playwright install
+      - run: npx @replayio/playwright install
       - run: npm run build
       - run: npm run test:functional:update -- --project ${{ github.event.inputs.playwright-project }}
       - uses: EndBug/add-and-commit@v7
