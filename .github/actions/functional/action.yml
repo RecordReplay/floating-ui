@@ -23,7 +23,7 @@ runs:
       shell: sh
     - run: npm run build
       shell: sh
-    - uses: replayio/action-playwright@ryan-update-comment-ui
+    - uses: replayio/action-playwright@ryan-alt-action-path
       with:
         command: npm run test:functional --
         issue-number: ${{ inputs.issue-number }}
