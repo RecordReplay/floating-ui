@@ -9,8 +9,8 @@ on:
         - chromium
         - replay-chromium
         - replay-firefox
-  schedule:
-    - cron:  '30 5 * * *'
+#   schedule:
+#     - cron:  '30 5 * * *'
 
 jobs:
   functional-tests:
