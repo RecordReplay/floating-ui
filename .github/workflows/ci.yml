@@ -4,6 +4,10 @@ on:
     branches:
       - main
   pull_request:
+  workflow_dispatch:
+    inputs:
+      project:
+        description: "Playwright Project Name"
 
 jobs:
   checks:
@@ -30,6 +34,6 @@ jobs:
       - uses: ./.github/actions/setup
       - uses: ./.github/actions/functional
         with:
-          project: "replay-chromium"
+          project: ${{ github.event.inputs.project || 'replay-chromium' }}
           issue-number: ${{ github.event.pull_request.number }}
           apiKey: ${{ secrets.RECORD_REPLAY_API_KEY }}

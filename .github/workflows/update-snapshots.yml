@@ -1,5 +1,9 @@
 name: Update Visual Snapshots
-on: [workflow_dispatch]
+on:
+  workflow_dispatch:
+    inputs:
+      project:
+        description: "Playwright Project Name"
 env:
   PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1 # Skip downloading during yarn install
   PLAYWRIGHT_BROWSERS_PATH: 0 # Places binaries to node_modules/@playwright/test
@@ -16,8 +20,9 @@ jobs:
       - run: npx playwright install-deps
       - uses: bahmutov/npm-install@v1
       - run: npx playwright install
+      - run: npx @replayio/playwright install
       - run: npm run build
-      - run: npm run test:functional:update
+      - run: npm run test:functional:update -- --project ${{ github.event.inputs.project || 'replay-chromium' }}
       - uses: EndBug/add-and-commit@v7
         with:
           add: '.'
