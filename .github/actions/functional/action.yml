@@ -32,6 +32,8 @@ runs:
         project: ${{ inputs.project }}
         apiKey: ${{ inputs.apiKey }}
         upload-all: true
+      env:
+        RECORD_REPLAY_DRIVER: ${{ inputs.project == 'replay-chromium' && '/tmp' || '' }}
     - uses: actions/upload-artifact@v2
       if: always()
       with:
