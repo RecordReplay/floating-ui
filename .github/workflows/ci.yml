@@ -8,6 +8,9 @@ on:
     inputs:
       project:
         description: "Playwright Project Name"
+      no-record:
+        type: boolean
+        description: "Do not record replays"
 
 jobs:
   checks:
@@ -37,3 +40,5 @@ jobs:
           project: ${{ github.event.inputs.project || 'replay-chromium' }}
           issue-number: ${{ github.event.pull_request.number }}
           apiKey: ${{ secrets.RECORD_REPLAY_API_KEY }}
+        env:
+          RECORD_REPLAY_NO_RECORD: ${{ github.event.inputs.no-record == true && '1' || '' }}
